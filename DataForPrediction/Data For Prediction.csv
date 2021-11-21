@@ -1,0 +1,11 @@
+age,sex,on_thyroxine,query_on_thyroxine,on_antithyroid_medication,sick,pregnant,thyroid_surgery,I131_treatment,query_hypothyroid,query_hyperthyroid,lithium,goitre,tumor,hypopituitary,psych,TSH_measured,TSH,T3_measured,T3,TT4_measured,TT4,T4U_measured,T4U,FTI_measured,FTI,referral_source,Class
+3.737669618,F,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,0.832909123,t,1.252762968,t,4.836281907,t,0.760805829,t,4.700480366,SVHC,negative
+3.17805383,F,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,1.62924054,t,1.098612289,t,4.634728988,f,,f,,other,negative
+3.850147602,M,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,0.683096845,f,,t,4.700480366,t,0.647103242,t,4.795790546,other,negative
+4.262679877,F,t,f,f,f,f,f,f,f,f,f,f,f,f,f,t,0.148420005,t,1.064710737,t,5.170483995,f,,f,,other,negative
+4.262679877,F,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,0.542324291,t,0.78845736,t,4.127134385,t,0.625938431,t,4.262679877,SVI,negative
+2.944438979,F,t,f,f,f,f,f,f,f,f,f,f,f,f,f,t,0.029558802,f,,t,5.214935758,t,0.832909123,t,4.955827058,other,negative
+4.094344562,F,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,,f,,t,4.290459441,t,0.652325186,t,4.369447852,other,negative
+4.394449155,F,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,1.16315081,t,0.470003629,t,4.394449155,t,0.530628251,t,4.753590191,SVI,negative
+4.204692619,F,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,0.470003629,t,1.16315081,t,4.820281566,t,0.657520003,t,4.890349128,SVI,negative
+4.234106505,M,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,1.223775432,t,0.955511445,t,4.430816799,t,0.636576829,t,4.543294782,SVI,negative

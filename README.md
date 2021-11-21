@@ -1,1 +1,1 @@
-# DetectionOfThyroid
+# Thyroid-Detection-Project
