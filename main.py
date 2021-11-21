@@ -1,5 +1,5 @@
 from TrainingModels import training
-#from PredictionFromModel import predictionfile
+from PredictionFromModel import predictionfile
 from flask import Flask, render_template, request
 import os
 import warnings
@@ -33,12 +33,12 @@ def train_route():
     return render_template("train.html")
 
 
-# @app.route('/prediction',methods=['GET', 'POST'])
-# def pred_route():
-#     pred_obj = predictionfile.PredictionModel()
-#     pred_obj.preprocess_pred_data()
-#     pred = pred_obj.make_prediction()
-#     return render_template("predict.html",pred = pred)
+@app.route('/prediction',methods=['GET', 'POST'])
+def pred_route():
+    pred_obj = predictionfile.PredictionModel()
+    pred_obj.preprocess_pred_data()
+    pred = pred_obj.make_prediction()
+    return render_template("predict.html",pred = pred)
 
 
 if __name__ == '__main__':

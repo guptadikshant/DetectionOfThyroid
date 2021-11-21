@@ -1,9 +1,18 @@
+import os
 from DataForPrediction import PredictionData
 from DataPreprocessing import PredictionDataPreprocess
-from Application_Logging import logging
 import pickle
 import warnings
 warnings.filterwarnings("ignore")
+import logging
+os.makedirs("Application_Logs", exist_ok=True)
+
+logging.basicConfig(
+    filename=os.path.join("Application_Logs", 'running_logs.log'),
+    level=logging.INFO,
+    format="[%(asctime)s: %(levelname)s: %(module)s]: %(message)s",
+    filemode="a"
+)
 
 class PredictionModel:
 
@@ -13,9 +22,8 @@ class PredictionModel:
         """
         self.preprocessor = PredictionDataPreprocess.Preprocessor()
         self.prediction_data = PredictionData.data_from_data_for_pred()
-        self.loaded_model = pickle.load(open(r"C:\Users\Dikshant\Downloads\New folder\Thyroid-Detection-Project\BestModel\Model.pkl", "rb"))
-        self.file_object = open("Application_Logging/Prediction_From_Model.txt", 'a+')
-        self.log_writer = logging.App_Logger()
+        self.path = os.path.join("BestModel","Model.pkl")
+        self.loaded_model = pickle.load(open( self.path, "rb"))
 
     def preprocess_pred_data(self):
         """
@@ -24,11 +32,11 @@ class PredictionModel:
         :return: final_pred_data
         :rtype: DataFrame
         """
-        self.log_writer.log(self.file_object,"Entering the prediction file module ")
+        logging.info("Entering the prediction file module ")
         self.preprocessor.check_null_values(self.prediction_data)
         preprocessed_pred_data = self.preprocessor.encode_and_impute_data(self.prediction_data)
         self.final_pred_data = self.preprocessor.preprocessor_pipeline(preprocessed_pred_data)
-        self.log_writer.log(self.file_object,"Preprocessing of prediction data completed")
+        logging.info("Preprocessing of prediction data completed")
         return self.final_pred_data
 
 
@@ -39,7 +47,7 @@ class PredictionModel:
         :return: final_pred
         :rtype: list
         """
-        self.log_writer.log(self.file_object,"Entering the make prediction function")
+        logging.info("Entering the make prediction function")
         final_pred = []
         y_pred = self.loaded_model.predict(self.final_pred_data)
 
@@ -54,7 +62,7 @@ class PredictionModel:
                 ele = "secondary_hypothyroid"
             final_pred.append(ele)
 
-        self.log_writer.log(self.file_object, "All the prediction are done and stored in final_pred list")
+        logging.info("All the prediction are done and stored in final_pred list")
 
         return final_pred
 

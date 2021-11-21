@@ -11,6 +11,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 import logging
+os.makedirs("Application_Logs", exist_ok=True)
 
 logging.basicConfig(
     filename=os.path.join("Application_Logs", 'running_logs.log'),

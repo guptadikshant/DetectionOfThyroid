@@ -4,20 +4,27 @@ from sklearn.impute import KNNImputer
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-from Application_Logging import logging
 import warnings
 warnings.filterwarnings("ignore")
+import logging
+os.makedirs("Application_Logs", exist_ok=True)
+
+logging.basicConfig(
+    filename=os.path.join("Application_Logs", 'running_logs.log'),
+    level=logging.INFO,
+    format="[%(asctime)s: %(levelname)s: %(module)s]: %(message)s",
+    filemode="a"
+)
 
 
 class Preprocessor:
 
     def __init__(self):
-        self.file_object = open("Application_Logging/Prediction_Preprocessing_Logs.txt", 'a+')
-        self.log_writer = logging.App_Logger()
+        pass
 
     def check_null_values(self, data):
 
-        self.log_writer.log(self.file_object,"Start of the Prediction Data Preprocessing")
+        logging.info("Start of the Prediction Data Preprocessing")
 
         feature_with_null = [feature for feature in data.columns if data[feature].isnull().sum() > 0]
 
@@ -30,12 +37,14 @@ class Preprocessor:
             os.makedirs(Missing_Values, exist_ok=True)
             dataframe_with_null.to_csv("MissingValues/PredictionDataWithMissingValues.CSV", index=False)
 
-            self.log_writer.log(self.file_object , "Prediction data has some missing values. Please check the Missing value folder for more info")
+            logging.info("Prediction data has some missing values. Please check the Missing value folder for more info")
 
         else:
-            self.log_writer.log(self.file_object , "No missing value in any feature in Prediction Data")
+            logging.info("No missing value in any feature in Prediction Data")
 
     def encode_and_impute_data(self, data):
+
+        logging.info("Entered encode_and_impute_data method for prediction")
 
         data["sex"] = np.where(data["sex"] == "F", 0, 1)
         data["referral_source"] = data["referral_source"].map(
@@ -50,11 +59,13 @@ class Preprocessor:
         self.numerical_features = [feature for feature in data.columns if feature not in self.categorical_features
                                    and feature not in ["Class","kfold"]]
 
-        self.log_writer.log(self.file_object, "Some features are encoded fine and features are divided into numerical and categorcial")
+        logging.info("Some features are encoded fine and features are divided into numerical and categorcial")
 
         return data
 
     def preprocessor_pipeline(self, data):
+
+        logging.info("Entered the preprocessor_pipeline method of Prediction")
 
         numerical_transformer = KNNImputer(n_neighbors=2, weights='uniform', missing_values=np.nan)
         categorical_transformer = Pipeline(steps=[
@@ -70,6 +81,6 @@ class Preprocessor:
 
         data = preprocessor.fit_transform(data)
 
-        self.log_writer.log(self.file_object, "All features are encoded and imputed fine. Exiting the Prediction Data Process module")
+        logging.info("All features are encoded and imputed fine. Exiting the Prediction Data Process module")
 
         return data
