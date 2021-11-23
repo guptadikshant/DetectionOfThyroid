@@ -1,8 +1,7 @@
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier, \
-    ExtraTreesClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier, ExtraTreesClassifier
 from xgboost import XGBClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import MultinomialNB
@@ -11,8 +10,6 @@ from sklearn.metrics import roc_auc_score, accuracy_score
 import os
 import pickle
 import warnings
-
-warnings.filterwarnings("ignore")
 import logging
 os.makedirs("Application_Logs", exist_ok=True)
 logging.basicConfig(
@@ -21,11 +18,12 @@ logging.basicConfig(
     format="[%(asctime)s: %(levelname)s: %(module)s]: %(message)s",
     filemode="a"
 )
+warnings.filterwarnings("ignore")
 
 
 class ModelTuner:
     """
-    This Class is used to first train different models on the train data and check the ROC_AUC scores
+    This Class is used to first train different models on the train data and check the Accuracy scores
     on validation data. Then after comparison it finds the best model and saves it.
     """
 
@@ -52,7 +50,7 @@ class ModelTuner:
         """
 
         logging.info("Entering the best parameter function of Logistic Regression")
-        print("Entering the best parameter function of Logistic Regression")
+        
         param_logistic = {
             "penalty": ["l1", "l2", "elasticnet", "none"],
             "tol": [1e-10, 1e-8, 1e-6, 1e-4, 1e-2],
@@ -78,8 +76,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Logistic Regression are {best_params}. Exiting the function.")
 
-        print("Exiting logistic regression")
-
         return self.lrmodel
 
     def get_best_param_decisiontree(self, x_train, y_train):
@@ -91,7 +87,6 @@ class ModelTuner:
         """
 
         logging.info("Entering the best parameter function of Decision Tree")
-        print("Entering the best parameter function of Decision Tree")
 
         param_grid = {
             "criterion": ["gini", "entropy"],
@@ -120,7 +115,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Decision Tree are {best_params}.Exiting the function.")
 
-        print("Exiting Decision Tree")
 
         return self.dtmodel
 
@@ -133,7 +127,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of Random Forest")
-        print("Entering the best parameter function of Random Forest")
 
         param_grid = {
             "n_estimators": range(100, 1000, 100),
@@ -161,7 +154,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Random Forest are {best_params}.Exiting the function.")
 
-        print("Exiting Random Forest")
 
         return self.rfmodel
 
@@ -174,7 +166,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of Extra Tree")
-        print("Entering the best parameter function of Extra Tree")
 
         param_grid = {
             "n_estimators": range(100, 1000, 100),
@@ -202,8 +193,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Extra Tree are {best_params}.Exiting the function.")
 
-        print("Exiting Extra Tree function")
-
         return self.etmodel
 
     def get_best_param_adaboost(self, x_train, y_train):
@@ -215,8 +204,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of Ada Boost")
-
-        print("Entering the best parameter function of Ada Boost")
 
         param_grid = {
             "base_estimator": [DecisionTreeClassifier(), RandomForestClassifier()],
@@ -241,8 +228,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Ada Boost are {best_params}.Exiting the function.")
 
-        print("Exiting Ada boost function")
-
         return self.admodel
 
     def get_best_param_gbboost(self, x_train, y_train):
@@ -254,8 +239,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of Gradient Boosting")
-
-        print("Entering the best parameter function of Gradient Boosting")
 
         param_grid = {
             "loss": ["deviance", "exponential"],
@@ -287,8 +270,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Gradient Boosting are {best_params}.Exiting the function.")
 
-        print("Exiting Gradient Boosting function")
-
         return self.gbmodel
 
     def get_best_param_xgboost(self, x_train, y_train):
@@ -300,8 +281,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of XG Boost")
-
-        print("Entering the best parameter function of XG Boost")
 
         param_grid = {
             "n_estimators": range(100, 1000, 100),
@@ -333,8 +312,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for XG Boost are {best_params}.Exiting the function.")
 
-        print("Exiting XGBoost function")
-
         return self.xgmodel
 
     def get_best_param_knn(self, x_train, y_train):
@@ -346,8 +323,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of KNN")
-
-        print("Entering the best parameter function of KNN")
 
         param_grid = {
             "n_neighbors": range(1, 20, 3),
@@ -373,8 +348,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for KNN are {best_params}.Exiting the function.")
 
-        print("Exiting KNN function")
-
         return self.knnmodel
 
     def get_best_param_nbayes(self, x_train, y_train):
@@ -386,8 +359,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the best parameter function of Naive Bayes")
-
-        print("Entering the best parameter function of Naive Bayes")
 
         param_grid = {
             "alpha": list(np.arange(1.0, 10.0)),
@@ -410,8 +381,6 @@ class ModelTuner:
 
         logging.info(f"the best parameter function for Naive Bayes are {best_params}.Exiting the function.")
 
-        print("Exiting Naive Bayes function")
-
         return self.nbmodel
 
     def get_train_accuracy(self, x_train, y_train):
@@ -422,8 +391,6 @@ class ModelTuner:
         """
 
         logging.info("Entering the function of train accuracy")
-
-        print("Entering train accuracy function")
 
         self.lrmodel_trained = self.get_best_param_logistic(x_train, y_train)
         self.dtmodel_trained = self.get_best_param_decisiontree(x_train, y_train)
@@ -445,23 +412,21 @@ class ModelTuner:
         knn_pred = self.knnmodel_trained.predict(x_train)
         nbayes_pred = self.nbmodel_trained.predict(x_train)
 
-        logistic_rocscore = accuracy_score(y_train, logistic_pred)
-        decisiontree_rocscore = accuracy_score(y_train, decision_pred)
-        randomforest_rocscore = accuracy_score(y_train, random_pred)
-        extratree_rocscore = accuracy_score(y_train, extratree_pred)
-        adaboost_rocscore = accuracy_score(y_train, adaboost_pred)
-        gbboost_rocscore = accuracy_score(y_train, gbboost_pred)
-        xgbbost_rocscore = accuracy_score(y_train, xgboost_pred)
-        knn_rocscore = accuracy_score(y_train, knn_pred)
-        nbayes_rocscore = accuracy_score(y_train, nbayes_pred)
+        logistic_accscore = accuracy_score(y_train, logistic_pred)
+        decisiontree_accscore = accuracy_score(y_train, decision_pred)
+        randomforest_accscore = accuracy_score(y_train, random_pred)
+        extratree_accscore = accuracy_score(y_train, extratree_pred)
+        adaboost_accscore = accuracy_score(y_train, adaboost_pred)
+        gbboost_accscore = accuracy_score(y_train, gbboost_pred)
+        xgbbost_accscore = accuracy_score(y_train, xgboost_pred)
+        knn_accscore = accuracy_score(y_train, knn_pred)
+        nbayes_accscore = accuracy_score(y_train, nbayes_pred)
 
-        trainacc = [logistic_rocscore, decisiontree_rocscore, randomforest_rocscore,
-                    extratree_rocscore, adaboost_rocscore, gbboost_rocscore, xgbbost_rocscore,
-                    knn_rocscore, nbayes_rocscore]
+        trainacc = [logistic_accscore, decisiontree_accscore, extratree_accscore,
+                    randomforest_accscore, adaboost_accscore, gbboost_accscore, xgbbost_accscore,
+                    knn_accscore, nbayes_accscore]
 
         logging.info(f"The train accuracy of different models is \n {trainacc}. \n Exiting the function.")
-
-        print("Exiting train accuracy function")
 
     def get_best_model(self, x_train, y_train, x_valid, y_valid):
         """
@@ -470,8 +435,6 @@ class ModelTuner:
          """
 
         logging.info("Entering the function of validation accuracy")
-
-        print("Entering the function of validation accuracy")
 
         logistic_pred = self.lrmodel_trained.predict(x_valid)
         decision_pred = self.dtmodel_trained.predict(x_valid)
@@ -483,39 +446,37 @@ class ModelTuner:
         knn_pred = self.knnmodel_trained.predict(x_valid)
         nbayes_pred = self.nbmodel_trained.predict(x_valid)
 
-        logistic_rocscore = accuracy_score(y_valid, logistic_pred)
-        decisiontree_rocscore = accuracy_score(y_valid, decision_pred)
-        randomforest_rocscore = accuracy_score(y_valid, random_pred)
-        extratree_rocscore = accuracy_score(y_valid, extratree_pred)
-        adaboost_rocscore = accuracy_score(y_valid, adaboost_pred)
-        gbboost_rocscore = accuracy_score(y_valid, gbboost_pred)
-        xgbbost_rocscore = accuracy_score(y_valid, xgboost_pred)
-        knn_rocscore = accuracy_score(y_valid, knn_pred)
-        nbayes_rocscore = accuracy_score(y_valid, nbayes_pred)
+        logistic_accscore = accuracy_score(y_valid, logistic_pred)
+        decisiontree_accscore = accuracy_score(y_valid, decision_pred)
+        randomforest_accscore = accuracy_score(y_valid, random_pred)
+        extratree_accscore = accuracy_score(y_valid, extratree_pred)
+        adaboost_accscore = accuracy_score(y_valid, adaboost_pred)
+        gbboost_accscore = accuracy_score(y_valid, gbboost_pred)
+        xgbbost_accscore = accuracy_score(y_valid, xgboost_pred)
+        knn_accscore = accuracy_score(y_valid, knn_pred)
+        nbayes_accscore = accuracy_score(y_valid, nbayes_pred)
 
-        validation_acc = [logistic_rocscore, decisiontree_rocscore, randomforest_rocscore,
-                          extratree_rocscore, adaboost_rocscore, gbboost_rocscore, xgbbost_rocscore,
-                          knn_rocscore, nbayes_rocscore]
+        validation_acc = [logistic_accscore, decisiontree_accscore, extratree_accscore,
+                        randomforest_accscore,adaboost_accscore, gbboost_accscore, 
+                        xgbbost_accscore, knn_accscore, nbayes_accscore]
 
         logging.info(f"The validation accuracy of different models is \n {validation_acc}.")
 
         best_model_dict = {
-            self.lrmodel: logistic_rocscore,
-            self.dtmodel: decisiontree_rocscore,
-            self.rfmodel: randomforest_rocscore,
-            self.etmodel: extratree_rocscore,
-            self.admodel: adaboost_rocscore,
-            self.gbmodel: gbboost_rocscore,
-            self.xgmodel: xgbbost_rocscore,
-            self.knnmodel: knn_rocscore,
-            self.nbmodel: nbayes_rocscore
+            self.lrmodel: logistic_accscore,
+            self.dtmodel: decisiontree_accscore,
+            self.rfmodel: randomforest_accscore,
+            self.etmodel: extratree_accscore,
+            self.admodel: adaboost_accscore,
+            self.gbmodel: gbboost_accscore,
+            self.xgmodel: xgbbost_accscore,
+            self.knnmodel: knn_accscore,
+            self.nbmodel: nbayes_accscore
         }
         # To find the best model.
         self.best_model = max(zip(best_model_dict.values(), best_model_dict.keys()))[1]
 
         logging.info(f"The best model is \n {self.best_model}.\n Exiting the function")
-
-        print("Exiting validation accuracy function")
 
         return self.best_model
 
@@ -528,8 +489,6 @@ class ModelTuner:
 
         logging.info("Entering the function of save best model")
 
-        print("entering save model function")
-
         modelname = self.best_model
         model_dir = "BestModel"
         os.makedirs(model_dir, exist_ok=True)
@@ -538,5 +497,3 @@ class ModelTuner:
         pickle.dump(modelname, open(model_path, "wb"))
 
         logging.info(f"The best model is saved at {model_path}. Exiting the module")
-
-        print("exiting save model function")

@@ -33,10 +33,13 @@ class PredictionModel:
         :rtype: DataFrame
         """
         logging.info("Entering the prediction file module ")
+
         self.preprocessor.check_null_values(self.prediction_data)
         preprocessed_pred_data = self.preprocessor.encode_and_impute_data(self.prediction_data)
         self.final_pred_data = self.preprocessor.preprocessor_pipeline(preprocessed_pred_data)
+
         logging.info("Preprocessing of prediction data completed")
+
         return self.final_pred_data
 
 
@@ -48,7 +51,9 @@ class PredictionModel:
         :rtype: list
         """
         logging.info("Entering the make prediction function")
+
         final_pred = []
+        
         y_pred = self.loaded_model.predict(self.final_pred_data)
 
         for ele in y_pred:

@@ -24,6 +24,11 @@ class Preprocessor:
 
     def check_null_values(self, data):
 
+        """
+        Checking the null values in the Prediction Data and storing
+        the features in the PredictionDataWithMissingValues.CSV file
+        """
+
         logging.info("Start of the Prediction Data Preprocessing")
 
         feature_with_null = [feature for feature in data.columns if data[feature].isnull().sum() > 0]
@@ -43,6 +48,13 @@ class Preprocessor:
             logging.info("No missing value in any feature in Prediction Data")
 
     def encode_and_impute_data(self, data):
+
+        """
+        Encoding some of the features of the prediction data and
+        dividing the features into numerical and categorical
+        :return: prediction data
+        :rtype: DataFrame
+        """
 
         logging.info("Entered encode_and_impute_data method for prediction")
 
@@ -64,6 +76,12 @@ class Preprocessor:
         return data
 
     def preprocessor_pipeline(self, data):
+
+        """
+        Creating a pipeline to encode and impute the features of the prediction data
+        :return: data
+        :rtype: Numpy Array
+        """
 
         logging.info("Entered the preprocessor_pipeline method of Prediction")
 
