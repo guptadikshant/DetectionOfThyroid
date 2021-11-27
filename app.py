@@ -19,15 +19,6 @@ def index():
     return render_template("home.html")
 
 
-@app.route('/train', methods=['GET', 'POST'])
-def train_route():
-    train_obj = training.TrainModel()
-    train_obj.separate_train_test_split()
-    train_obj.preprocess_data()
-    train_obj.best_model_select()
-    return render_template("train.html")
-
-
 @app.route('/prediction',methods=['GET', 'POST'])
 def pred_route():
     pred_obj = predictionfile.PredictionModel()
