@@ -16,7 +16,6 @@ def index():
             os.makedirs("DataForPrediction")
         filepath = os.path.join("DataForPrediction", file.filename)
         file.save(filepath)
-        return render_template("thankyou.html")
     return render_template("home.html")
 
 
