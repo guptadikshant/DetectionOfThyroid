@@ -1,4 +1,3 @@
-from TrainingModels import training
 from PredictionFromModel import predictionfile
 from flask import Flask, render_template, request
 import os
@@ -24,7 +23,8 @@ def pred_route():
     pred_obj = predictionfile.PredictionModel()
     pred_obj.preprocess_pred_data()
     pred = pred_obj.make_prediction()
-    return render_template("predict.html", pred = pred)
+    pred_obj.savemodelprediction()
+    return render_template("predict.html", pred = pred[:5])
 
 
 if __name__ == '__main__':

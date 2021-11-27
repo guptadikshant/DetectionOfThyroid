@@ -19,7 +19,13 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <h2>Your Model Prediction is {{pred}}</h2>
+            <h2>Your Model Prediction is saved in MongoDB Database</h2>
+            <h3> Some of the prediction are : </h3>
+           <ul>
+            {% for ele in pred %}
+            <li>{{ele}}</li>
+            {% endfor %}
+           </ul>
             <br>
         </a>
     </nav>

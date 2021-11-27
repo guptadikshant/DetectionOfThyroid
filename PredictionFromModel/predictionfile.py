@@ -2,6 +2,7 @@ import os
 from DataForPrediction import PredictionData
 from DataPreprocessing import PredictionDataPreprocess
 import pickle
+import pymongo
 import warnings
 warnings.filterwarnings("ignore")
 import logging
@@ -52,7 +53,7 @@ class PredictionModel:
         """
         logging.info("Entering the make prediction function")
 
-        final_pred = []
+        self.final_pred = []
         
         y_pred = self.loaded_model.predict(self.final_pred_data)
 
@@ -65,11 +66,27 @@ class PredictionModel:
                 ele = "primary_hypothyroid"
             else:
                 ele = "secondary_hypothyroid"
-            final_pred.append(ele)
+            self.final_pred.append(ele)
 
         logging.info("All the prediction are done and stored in final_pred list")
 
-        return final_pred
+        return self.final_pred
+
+    def savemodelprediction(self):
+        DEFAULT_CONNECTION_URL = "mongodb://localhost:27017/"
+        DB_NAME = "ModelPrediction"
+        # Establish a connection with mongoDB
+        client = pymongo.MongoClient(DEFAULT_CONNECTION_URL)
+        # Create a DB
+        dataBase = client[DB_NAME]
+        CollectionName = "Prediction"
+        collection = dataBase[CollectionName]
+        pred_dict = {}
+        for i,j in enumerate(self.final_pred):
+            pred_dict[str(i)] = j
+
+        collection.insert_one(pred_dict)
+
 
 
 
