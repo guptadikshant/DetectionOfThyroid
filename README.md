@@ -4,8 +4,7 @@ A End to End machine learning project which analyses the variety
 of Thyroid types and predict using the classification algorithms.
 
 This is multiclass classification problem in which the user uploads the
-Excel/CSV file having the data and predictions are stores in the 
-MongoDB Database
+file having the data and predictions are stores in the MongoDB Database
 ## How to run?
 
 ### Step-1 : Clone this repository into your local system by using below command
@@ -30,7 +29,7 @@ pip install -r requirements.txt
 
 ### Step-4 Now run the main.py file by using below command in the terminal
 ```bash
-python main.py
+python app.py
 ```
 
     
