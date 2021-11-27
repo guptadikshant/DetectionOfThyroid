@@ -23,7 +23,7 @@ def pred_route():
     pred_obj = predictionfile.PredictionModel()
     pred_obj.preprocess_pred_data()
     pred = pred_obj.make_prediction()
-    pred_obj.savemodelprediction()
+    # pred_obj.savemodelprediction()
     return render_template("predict.html", pred = pred[:5])
 
 

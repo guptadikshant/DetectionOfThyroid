@@ -72,20 +72,20 @@ class PredictionModel:
 
         return self.final_pred
 
-    def savemodelprediction(self):
-        DEFAULT_CONNECTION_URL = "mongodb://localhost:27017/"
-        DB_NAME = "ModelPrediction"
-        # Establish a connection with mongoDB
-        client = pymongo.MongoClient(DEFAULT_CONNECTION_URL)
-        # Create a DB
-        dataBase = client[DB_NAME]
-        CollectionName = "Prediction"
-        collection = dataBase[CollectionName]
-        pred_dict = {}
-        for i,j in enumerate(self.final_pred):
-            pred_dict[str(i)] = j
-
-        collection.insert_one(pred_dict)
+    # def savemodelprediction(self):
+    #     DEFAULT_CONNECTION_URL = "mongodb://localhost:27017/"
+    #     DB_NAME = "ModelPrediction"
+    #     # Establish a connection with mongoDB
+    #     client = pymongo.MongoClient(DEFAULT_CONNECTION_URL)
+    #     # Create a DB
+    #     dataBase = client[DB_NAME]
+    #     CollectionName = "Prediction"
+    #     collection = dataBase[CollectionName]
+    #     pred_dict = {}
+    #     for i,j in enumerate(self.final_pred):
+    #         pred_dict[str(i)] = j
+    #
+    #     collection.insert_one(pred_dict)
 
 
 
