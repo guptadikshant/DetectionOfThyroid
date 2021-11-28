@@ -37,9 +37,12 @@ python app.py
 https://www.kaggle.com/yasserhessein/thyroid-disease-data-set?select=hypothyroid.csv
 
 
+## Main Page
 ![main_page](https://user-images.githubusercontent.com/51189309/143774452-e5525ab6-acc9-4b5d-9dc1-4d2ae4ca35ee.JPG)
 
+## Model Predicton Page
 ![model prediction](https://user-images.githubusercontent.com/51189309/143774500-155d8b0a-725d-407a-ac21-30ce3cca3446.JPG)
 
+## Prediction Saved in MongoDB Atlas
 ![prediction saved in mongodb](https://user-images.githubusercontent.com/51189309/143774536-f5711ed9-4ae6-4203-a1f7-d8021a4b680c.JPG)
 
