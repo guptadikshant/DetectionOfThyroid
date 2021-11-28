@@ -10,7 +10,7 @@ file having the data and predictions are stores in the MongoDB Database
 ### Step-1 : Clone this repository into your local system by using below command
 
 ```bash
-git clone https://github.com/guptadikshant/Thyroid-Detection-Project.git
+git clone https://github.com/guptadikshant/DetectionOfThyroid.git
 
 ```
 
