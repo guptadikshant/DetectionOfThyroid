@@ -27,7 +27,7 @@ conda activate <environment name>
 pip install -r requirements.txt
 ```
 
-### Step-4 Now run the main.py file by using below command in the terminal
+### Step-4 Now run the app.py file by using below command in the terminal
 ```bash
 python app.py
 ```
